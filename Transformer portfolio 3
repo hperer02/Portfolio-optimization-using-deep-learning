@@ -1,0 +1,22 @@
+Portforlio assets: ['CPG.L', 'NG.L', 'BP.L', 'FERG.L', 'BATS.L', 'LIN', 'RKT.L', 'ULVR.L', 'SHEL.L', 'LLOY.L']
+
+CPG.L transformer_evals.var_ratio: 0.011296776547866205
+CPG.L transformer_evals.mape: 0.19097845056860785
+NG.L transformer_evals.var_ratio: 0.06050281982586725
+NG.L transformer_evals.mape: 0.1871862930311162
+BP.L transformer_evals.var_ratio: 0.05189886385050679
+BP.L transformer_evals.mape: 0.029773700224006928
+FERG.L transformer_evals.var_ratio: 0.12630499906239212
+FERG.L transformer_evals.mape: 0.04156414942360809
+BATS.L transformer_evals.var_ratio: 0.10405455701912081
+BATS.L transformer_evals.mape: 0.03458250900775899
+LIN transformer_evals.var_ratio: 0.08096476931521546
+LIN transformer_evals.mape: 0.024200712367440633
+RKT.L transformer_evals.var_ratio: 0.10860599828852568
+RKT.L transformer_evals.mape: 0.036840995441396344
+ULVR.L transformer_evals.var_ratio: 0.07342121611854047
+ULVR.L transformer_evals.mape: 0.035675208703278435
+SHEL.L transformer_evals.var_ratio: 0.06503558405721321
+SHEL.L transformer_evals.mape: 0.040423479562366735
+LLOY.L transformer_evals.var_ratio: 0.009567761094909866
+LLOY.L transformer_evals.mape: 0.027362540586861092

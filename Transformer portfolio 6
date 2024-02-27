@@ -1,0 +1,22 @@
+Portforlio assets: ['LLOY.L', 'AON', 'BP.L', 'LIN', 'LSEG.L', 'BATS.L', 'SHEL.L', 'AAL.L', 'DGE.L', 'HSBA.L']
+
+LLOY.L transformer_evals.var_ratio: 0.18142673489043049
+LLOY.L transformer_evals.mape: 0.039742169409474434
+AON transformer_evals.var_ratio: 0.013193409567550995
+AON transformer_evals.mape: 0.022036915178415842
+BP.L transformer_evals.var_ratio: 0.012215704590328835
+BP.L transformer_evals.mape: 0.02636737570234524
+LIN transformer_evals.var_ratio: 0.01628042967961474
+LIN transformer_evals.mape: 0.021678308901331742
+LSEG.L transformer_evals.var_ratio: 0.019950641511839562
+LSEG.L transformer_evals.mape: 0.02329698149982133
+BATS.L transformer_evals.var_ratio: 0.008173657596998174
+BATS.L transformer_evals.mape: 0.01907779262050548
+SHEL.L transformer_evals.var_ratio: 0.011798923965608
+SHEL.L transformer_evals.mape: 0.023385076276448837
+AAL.L transformer_evals.var_ratio: 0.02471903890016136
+AAL.L transformer_evals.mape: 0.0403738507943224
+DGE.L transformer_evals.var_ratio: 0.022837554994195153
+DGE.L transformer_evals.mape: 0.016793426234740394
+HSBA.L transformer_evals.var_ratio: 0.015031988723699263
+HSBA.L transformer_evals.mape: 0.02267430019453095

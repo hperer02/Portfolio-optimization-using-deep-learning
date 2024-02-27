@@ -1,0 +1,22 @@
+Portforlio assets: ['REL.L', 'BA.L', 'LIN', 'RIO.L', 'BATS.L', 'BP.L', 'LLOY.L', 'LSEG.L', 'RKT.L', 'DGE.L']
+
+REL.L transformer_evals.var_ratio: 0.03493550405849788
+REL.L transformer_evals.mape: 0.017185822752038844
+BA.L transformer_evals.var_ratio: 0.013781350614524346
+BA.L transformer_evals.mape: 0.1705502661940797
+LIN transformer_evals.var_ratio: 0.01830546760033236
+LIN transformer_evals.mape: 0.01993013804229558
+RIO.L transformer_evals.var_ratio: 0.027955075773440474
+RIO.L transformer_evals.mape: 0.029109205221548994
+BATS.L transformer_evals.var_ratio: 0.02677706974565497
+BATS.L transformer_evals.mape: 0.019491795238792905
+BP.L transformer_evals.var_ratio: 0.01312285091441523
+BP.L transformer_evals.mape: 0.0269280731509755
+LLOY.L transformer_evals.var_ratio: 0.02017228749841482
+LLOY.L transformer_evals.mape: 0.037153187569048736
+LSEG.L transformer_evals.var_ratio: 0.023106761972342627
+LSEG.L transformer_evals.mape: 0.023987797868112743
+RKT.L transformer_evals.var_ratio: 0.08741988312600257
+RKT.L transformer_evals.mape: 0.017626786879040714
+DGE.L transformer_evals.var_ratio: 0.007916854862671796
+DGE.L transformer_evals.mape: 0.01696396869444562

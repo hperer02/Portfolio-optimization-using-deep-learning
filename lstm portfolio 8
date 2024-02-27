@@ -1,0 +1,22 @@
+Portforlio assets: ['REL.L', 'BA.L', 'LIN', 'RIO.L', 'BATS.L', 'BP.L', 'LLOY.L', 'LSEG.L', 'RKT.L', 'DGE.L']
+
+REL.L lstm_evals.var_ratio: 0.7654316910590164
+REL.L lstm_evals.mape: 0.5057301445922313
+BA.L lstm_evals.var_ratio: 0.7652013584545382
+BA.L lstm_evals.mape: 0.5711733212209293
+LIN lstm_evals.var_ratio: 0.7496652636320293
+LIN lstm_evals.mape: 0.48447558305513344
+RIO.L lstm_evals.var_ratio: 0.7631636795172406
+RIO.L lstm_evals.mape: 0.5052145799397494
+BATS.L lstm_evals.var_ratio: 0.7645980026993708
+BATS.L lstm_evals.mape: 0.5050498103690024
+BP.L lstm_evals.var_ratio: 0.7535870147450047
+BP.L lstm_evals.mape: 0.4948351048627098
+LLOY.L lstm_evals.var_ratio: 0.6645568082084786
+LLOY.L lstm_evals.mape: 0.31365663234383906
+LSEG.L lstm_evals.var_ratio: 0.7620899285872714
+LSEG.L lstm_evals.mape: 0.506559071659471
+RKT.L lstm_evals.var_ratio: 0.7757211373382723
+RKT.L lstm_evals.mape: 0.5066105783863639
+DGE.L lstm_evals.var_ratio: 0.7667769101580647
+DGE.L lstm_evals.mape: 0.5066909243490367

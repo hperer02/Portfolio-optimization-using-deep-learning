@@ -1,0 +1,22 @@
+Portforlio assets: ['FERG.L', 'SHEL.L', 'RIO.L', 'AON', 'ULVR.L', 'BP.L', 'RKT.L', 'DGE.L', 'LSEG.L', 'RR.L']
+
+FERG.L tt_evals.var_ratio: 0.18420986228374625
+FERG.L tt_evals.mape: 0.07347929741659912
+SHEL.L tt_evals.var_ratio: 0.1343605525542615
+SHEL.L tt_evals.mape: 0.07310074220730804
+RIO.L tt_evals.var_ratio: 0.17256645876944043
+RIO.L tt_evals.mape: 0.07217557248783488
+AON tt_evals.var_ratio: 0.11492458628750524
+AON tt_evals.mape: 0.06089033822263504
+ULVR.L tt_evals.var_ratio: 0.14899619065947833
+ULVR.L tt_evals.mape: 0.06920431709713362
+BP.L tt_evals.var_ratio: 0.13578885689981346
+BP.L tt_evals.mape: 0.07032940970461102
+RKT.L tt_evals.var_ratio: 0.18347264303787592
+RKT.L tt_evals.mape: 0.06928723421967745
+DGE.L tt_evals.var_ratio: 0.16379998828504594
+DGE.L tt_evals.mape: 0.07001456056987304
+LSEG.L tt_evals.var_ratio: 0.12117544242072964
+LSEG.L tt_evals.mape: 0.07259858640413729
+RR.L tt_evals.var_ratio: 0.20492876816867023
+RR.L tt_evals.mape: 0.08744827906736373

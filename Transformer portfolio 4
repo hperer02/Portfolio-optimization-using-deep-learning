@@ -1,0 +1,22 @@
+Portforlio assets: ['HSBA.L', 'LLOY.L', 'BATS.L', 'RKT.L', 'AAL.L', 'NG.L', 'LIN', 'REL.L', 'RIO.L', 'RR.L']
+
+HSBA.L transformer_evals.var_ratio: 0.03393159859105643
+HSBA.L transformer_evals.mape: 0.02294908819447336
+LLOY.L transformer_evals.var_ratio: 0.04236956624151822
+LLOY.L transformer_evals.mape: 0.07645057372067368
+BATS.L transformer_evals.var_ratio: 0.051090761692099806
+BATS.L transformer_evals.mape: 0.02240955936402416
+RKT.L transformer_evals.var_ratio: 0.06255739340876432
+RKT.L transformer_evals.mape: 0.022686438040531838
+AAL.L transformer_evals.var_ratio: 0.06584717252775685
+AAL.L transformer_evals.mape: 0.04289089679674473
+NG.L transformer_evals.var_ratio: 0.19091162405190265
+NG.L transformer_evals.mape: 0.17294798025171296
+LIN transformer_evals.var_ratio: 0.024470944939628647
+LIN transformer_evals.mape: 0.019808354543827258
+REL.L transformer_evals.var_ratio: 0.046969111976491784
+REL.L transformer_evals.mape: 0.023542310325659538
+RIO.L transformer_evals.var_ratio: 0.032453515949617096
+RIO.L transformer_evals.mape: 0.032979415536985565
+RR.L transformer_evals.var_ratio: 0.06413507652165873
+RR.L transformer_evals.mape: 0.04069982037683552

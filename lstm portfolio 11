@@ -1,0 +1,22 @@
+Portforlio assets: ['RR.L', 'SHEL.L', 'BA.L', 'FERG.L', 'GSK.L', 'RIO.L', 'CPG.L', 'AAL.L', 'LSEG.L', 'RKT.L']
+
+RR.L lstm_evals.var_ratio: 0.09259717049966498
+RR.L lstm_evals.mape: 0.09067353369868571
+SHEL.L lstm_evals.var_ratio: 0.016406546291895197
+SHEL.L lstm_evals.mape: 0.025662274092382014
+BA.L lstm_evals.var_ratio: 0.027427101676889443
+BA.L lstm_evals.mape: 0.16644098556717843
+FERG.L lstm_evals.var_ratio: 0.07591378812230631
+FERG.L lstm_evals.mape: 0.02563844076868998
+GSK.L lstm_evals.var_ratio: 0.02120323579886174
+GSK.L lstm_evals.mape: 0.018638727738693375
+RIO.L lstm_evals.var_ratio: 0.05301710271344262
+RIO.L lstm_evals.mape: 0.030584127162256648
+CPG.L lstm_evals.var_ratio: 0.03417227542721313
+CPG.L lstm_evals.mape: 0.17279227792399662
+AAL.L lstm_evals.var_ratio: 0.07535264278868059
+AAL.L lstm_evals.mape: 0.03989813278182332
+LSEG.L lstm_evals.var_ratio: 0.06466004417242277
+LSEG.L lstm_evals.mape: 0.025484330321277775
+RKT.L lstm_evals.var_ratio: 0.08131614238938312
+RKT.L lstm_evals.mape: 0.019014376523563897

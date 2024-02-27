@@ -1,0 +1,22 @@
+Portforlio assets: ['RKT.L', 'LSEG.L', 'GSK.L', 'ULVR.L', 'AON', 'RR.L', 'FERG.L', 'SHEL.L', 'DGE.L', 'REL.L']
+
+RKT.L transformer_evals.var_ratio: 0.0485116424548363
+RKT.L transformer_evals.mape: 0.018297164665219474
+LSEG.L transformer_evals.var_ratio: 0.038680779758122674
+LSEG.L transformer_evals.mape: 0.02357757696304548
+GSK.L transformer_evals.var_ratio: 0.004913543766406625
+GSK.L transformer_evals.mape: 0.019475340505786986
+ULVR.L transformer_evals.var_ratio: 0.041150269311083565
+ULVR.L transformer_evals.mape: 0.014904997283620314
+AON transformer_evals.var_ratio: 0.004646659827673316
+AON transformer_evals.mape: 0.022012364023114638
+RR.L transformer_evals.var_ratio: 0.10482722054164872
+RR.L transformer_evals.mape: 0.04276758024321794
+FERG.L transformer_evals.var_ratio: 0.04698858328942923
+FERG.L transformer_evals.mape: 0.024640217494291235
+SHEL.L transformer_evals.var_ratio: 0.01359830806022111
+SHEL.L transformer_evals.mape: 0.024839543019535445
+DGE.L transformer_evals.var_ratio: 0.031013177489777277
+DGE.L transformer_evals.mape: 0.017861514397036045
+REL.L transformer_evals.var_ratio: 0.023285358024709324
+REL.L transformer_evals.mape: 0.018247663612049155

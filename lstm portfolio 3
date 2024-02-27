@@ -1,0 +1,22 @@
+Portforlio assets: ['CPG.L', 'NG.L', 'BP.L', 'FERG.L', 'BATS.L', 'LIN', 'RKT.L', 'ULVR.L', 'SHEL.L', 'LLOY.L']
+
+CPG.L lstm_evals.var_ratio: 0.7796933481094039
+CPG.L lstm_evals.mape: 0.5796644899663548
+NG.L lstm_evals.var_ratio: 0.794320176331514
+NG.L lstm_evals.mape: 0.5768904169671669
+BP.L lstm_evals.var_ratio: 0.7449184585471695
+BP.L lstm_evals.mape: 0.49223193577093244
+FERG.L lstm_evals.var_ratio: 0.7745178211311055
+FERG.L lstm_evals.mape: 0.5081188286026044
+BATS.L lstm_evals.var_ratio: 0.7659846224887822
+BATS.L lstm_evals.mape: 0.504114839934053
+LIN lstm_evals.var_ratio: 0.751558091279793
+LIN lstm_evals.mape: 0.4931237235460723
+RKT.L lstm_evals.var_ratio: 0.7799038301814647
+RKT.L lstm_evals.mape: 0.5050131374765415
+ULVR.L lstm_evals.var_ratio: 0.7714060752048415
+ULVR.L lstm_evals.mape: 0.5052358981266669
+SHEL.L lstm_evals.var_ratio: 0.7571077174163316
+SHEL.L lstm_evals.mape: 0.5065022667531398
+LLOY.L lstm_evals.var_ratio: 0.7496870224880364
+LLOY.L lstm_evals.mape: 0.46303807943492326

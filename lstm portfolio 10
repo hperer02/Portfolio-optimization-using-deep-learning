@@ -1,0 +1,22 @@
+Portforlio assets: ['HSBA.L', 'AON', 'BA.L', 'LLOY.L', 'BATS.L', 'RIO.L', 'NG.L', 'RKT.L', 'AAL.L', 'SHEL.L']
+
+HSBA.L lstm_evals.var_ratio: 0.7577703592814224
+HSBA.L lstm_evals.mape: 0.4896793523393646
+AON lstm_evals.var_ratio: 0.7371914049239896
+AON lstm_evals.mape: 0.4689332564416016
+BA.L lstm_evals.var_ratio: 0.7686214986249256
+BA.L lstm_evals.mape: 0.572432820659643
+LLOY.L lstm_evals.var_ratio: 4.765741463351471
+LLOY.L lstm_evals.mape: 0.12330580688955528
+BATS.L lstm_evals.var_ratio: 0.7639362482549716
+BATS.L lstm_evals.mape: 0.5060176350412017
+RIO.L lstm_evals.var_ratio: 0.7640025560637224
+RIO.L lstm_evals.mape: 0.5054605007022942
+NG.L lstm_evals.var_ratio: 0.7927135288565891
+NG.L lstm_evals.mape: 0.5791536592427188
+RKT.L lstm_evals.var_ratio: 0.7746396703419984
+RKT.L lstm_evals.mape: 0.5066414738609197
+AAL.L lstm_evals.var_ratio: 0.7672860170084309
+AAL.L lstm_evals.mape: 0.5033183819200899
+SHEL.L lstm_evals.var_ratio: 0.7576814160748945
+SHEL.L lstm_evals.mape: 0.5091867127373845

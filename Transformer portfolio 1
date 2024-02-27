@@ -1,0 +1,22 @@
+Portforlio assets: ['FERG.L', 'SHEL.L', 'RIO.L', 'AON', 'ULVR.L', 'BP.L', 'RKT.L', 'DGE.L', 'LSEG.L', 'RR.L']
+
+FERG.L Transformer_evals.var_ratio: 0.08924523852460975
+FERG.L Transformer_evals.mape: 0.02900642676879308
+SHEL.L Transformer_evals.var_ratio: 0.02729639148932017
+SHEL.L Transformer_evals.mape: 0.027368576115864362
+RIO.L Transformer_evals.var_ratio: 0.057680916028539087
+RIO.L Transformer_evals.mape: 0.03234374948055554
+AON Transformer_evals.var_ratio: 0.01224960088612237
+AON Transformer_evals.mape: 0.023710947011914493
+ULVR.L Transformer_evals.var_ratio: 0.07864543383966494
+ULVR.L Transformer_evals.mape: 0.019827883795477234
+BP.L Transformer_evals.var_ratio: 0.014880262451622328
+BP.L Transformer_evals.mape: 0.026051206854563785
+RKT.L Transformer_evals.var_ratio: 0.07517495943252361
+RKT.L Transformer_evals.mape: 0.023563705744935062
+DGE.L Transformer_evals.var_ratio: 0.05993727783573999
+DGE.L Transformer_evals.mape: 0.022776626267917002
+LSEG.L Transformer_evals.var_ratio: 0.047792664827732256
+LSEG.L Transformer_evals.mape: 0.02894503611714256
+RR.L Transformer_evals.var_ratio: 0.09694658698361214
+RR.L Transformer_evals.mape: 0.04359336523846555

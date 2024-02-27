@@ -1,0 +1,22 @@
+Portforlio assets: ['LSEG.L', 'BP.L', 'ULVR.L', 'GSK.L', 'AAL.L', 'RR.L', 'RIO.L', 'REL.L', 'BATS.L', 'HSBA.L']
+
+LSEG.L transformer_evals.var_ratio: 0.0265945704608187
+LSEG.L transformer_evals.mape: 0.02382269689915047
+BP.L transformer_evals.var_ratio: 0.013018117628781578
+BP.L transformer_evals.mape: 0.026167073744092103
+ULVR.L transformer_evals.var_ratio: 0.03265757763690913
+ULVR.L transformer_evals.mape: 0.014876377956131002
+GSK.L transformer_evals.var_ratio: 0.007705548479605029
+GSK.L transformer_evals.mape: 0.019107695066290547
+AAL.L transformer_evals.var_ratio: 0.0671635801835252
+AAL.L transformer_evals.mape: 0.03874856710024748
+RR.L transformer_evals.var_ratio: 0.08811609584535529
+RR.L transformer_evals.mape: 0.04261293894272152
+RIO.L transformer_evals.var_ratio: 0.038469954405402795
+RIO.L transformer_evals.mape: 0.029448258052978616
+REL.L transformer_evals.var_ratio: 0.033038966349443144
+REL.L transformer_evals.mape: 0.018220485960773896
+BATS.L transformer_evals.var_ratio: 0.029511447551050285
+BATS.L transformer_evals.mape: 0.01918002749089311
+HSBA.L transformer_evals.var_ratio: 0.024979481725887043
+HSBA.L transformer_evals.mape: 0.022025164808048038
