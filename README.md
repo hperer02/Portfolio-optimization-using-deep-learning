@@ -42,7 +42,7 @@ The standard number of periods used to calculate the initial RSI value is 14. Th
 - EMA
   It is a weighted moving average which gives more priority to recent price data of the asset. It can be calculated using the below equation,
   
-	$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}} \right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}} \right)}$$
+	$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}}\right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}} \right)}$$
 
 Here, the N indicates the number of days chosen for EMA and the weighting given to the most recent price is greater for a short period of EMA than for a longer period of EMA (What is EMA? How to Use Exponential Moving Average With Formula, 2023).
 
@@ -52,11 +52,11 @@ This attribute is used to determine the momentum of an asset when it is gaining 
 	
 - Simple Moving Averages (SMA)
 It is a moving average calculated by adding the recent prices of an asset and dividing it by the number of time periods to get an average. For an example, to calculate the 5-day simple moving average of a stock, the last 5 closing prices of that particular stock will be added together and divided by 5. As input features, 5-day, 10-day and 20-day moving averages will be chosen and they will be calculated as below,
-	$$\text{5-day SMA} = \frac{1}{5} \sum_{t=1}^{5} \text{Closing Price}_t$$
+	$$\text{5-day SMA} = \frac{1}{5} \sum_{t=1}^{5} \text{Closing Price}$$
 	
-	$$\text{10-day SMA} = \frac{1}{10} \sum_{t=1}^{10} \text{Closing Price}_t$$
+	$$\text{10-day SMA} = \frac{1}{10} \sum_{t=1}^{10} \text{Closing Price}$$
 
-	$$\text{20-day SMA} = \frac{1}{20} \sum_{t=1}^{20} \text{Closing Price}_t$$
+	$$\text{20-day SMA} = \frac{1}{20} \sum_{t=1}^{20} \text{Closing Price}$$
 The above attributes were calculated for each asset and saved into a pandas data frame along with the closing prices and stock ticker value. The stock ticker value represents an integer value between 1-10. This is used for converting stock names into numerical values and identifying different assets for training purposes. For example, if a portfolio consists of [AAPL, MSFT, TSLA, …], their stock ticker values would be [1, 2, 3, …]
 
 ## Feature selection
