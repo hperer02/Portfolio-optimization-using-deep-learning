@@ -42,13 +42,13 @@ The standard number of periods used to calculate the initial RSI value is 14. Th
 - EMA
   It is a weighted moving average which gives more priority to recent price data of the asset. It can be calculated using the below equation,
   
-	$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}}\right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}} \right)}$$
+$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}}\right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}} \right)}$$
 
 Here, the N indicates the number of days chosen for EMA and the weighting given to the most recent price is greater for a short period of EMA than for a longer period of EMA (What is EMA? How to Use Exponential Moving Average With Formula, 2023).
 
 - MOM
 This attribute is used to determine the momentum of an asset when it is gaining or falling in price in the market. It simply compares the current price of an asset with the previous price of it from a given number of periods ago. It can be calculated as below,
-	$$\text{MOM} = \text{Closing Price}_{\text{current}} - \text{Closing Price}_{\text{n periods ago}}$$
+$$\text{MOM} = \text{Closing Price}_{\text{current}} - \text{Closing Price}_{\text{n periods ago}}$$
 	
 - Simple Moving Averages (SMA)
 It is a moving average calculated by adding the recent prices of an asset and dividing it by the number of time periods to get an average. For an example, to calculate the 5-day simple moving average of a stock, the last 5 closing prices of that particular stock will be added together and divided by 5. As input features, 5-day, 10-day and 20-day moving averages will be chosen and they will be calculated as below,
