@@ -42,7 +42,7 @@ The standard number of periods used to calculate the initial RSI value is 14. Th
 - EMA
   It is a weighted moving average which gives more priority to recent price data of the asset. It can be calculated using the below equation,
   
-	$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}}\right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}} \right)}$$
+	$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}}\right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}}\right)}$$
 
 Here, the N indicates the number of days chosen for EMA and the weighting given to the most recent price is greater for a short period of EMA than for a longer period of EMA (What is EMA? How to Use Exponential Moving Average With Formula, 2023).
 
@@ -76,6 +76,7 @@ All models have been designed using TensorFlow. Pytorch and TensorFlow are widel
 
 ### LSTM architecture
 LSTMs are made of an input layer, one/multiple hidden layers, and an output layer. The number of neurons in the input layer is equal to the number of input features.  
+
 ![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/c4cee307-488b-4fc9-9bc2-cd495ca8cc34)
 
 The special characteristic of LSTM is the capability of maintaining memory cells. To enable this, 3 gates are used in a LSTM memory cell, 
@@ -84,6 +85,7 @@ The special characteristic of LSTM is the capability of maintaining memory cells
   	- Output gate: Defines which information to use as the output
 
 Sen et al. designed an LSTM architecture to predict the future stock prices of top five assets from nine different sectors of the Indian Stock Market. The model uses only the ‘Daily close prices’ of the past 50 days of each stock. Therefore, the input layer takes the shape (50,1). Then, the model receives this data and forwards it to the first LSTM layer which contains 256 nodes. The LSTM layer has a shape of (50,256) at the output. The first LSTM layer is followed by a dropout layer which switches off 30 percent of the nodes to avoid overfitting and then another LSTM layer (50,256) receives the output coming from the dropout layer and which is followed by another dropout layer of the same dropout rate. Then finally, a dense layer with 256 nodes receives the output of the second LSTM layer and outputs a single node which yields the predicted value of the close price. The architecture diagram of the network is shown below.
+
 ![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/da9f20a8-7b48-4c5f-848b-8c9e1d44e6fb)
 
 However, the layout of the of the above architecture has to be adjusted to fulfill the purpose of the task. Therefore, instead of taking the previous close prices of the past 50 days, last weeks’ data is considered and instead of predicting the close price of the next day, the closing prices for the next are predicted using the model. The model was implemented using TensorFlow.
@@ -92,6 +94,7 @@ However, the layout of the of the above architecture has to be adjusted to fulfi
 
 ### Time series transformer model
 Attention concept was first introduced by Vaswani et al. to improve the performance of neural machine translation applications. Transformers use attention to enhance the training speed of the application. The transformers have 2 main components, the encoder part, and the decoder part. However, transformer models do not necessarily need to have both.  Below figure shows the Transformer model architecture proposed by Vaswani et al. (Vaswani et al., 2023)
+
 ![transformer](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/36e2670d-e592-4e8a-8d9f-3dad34f11cef)
 
 #### Encoder &  decoder
@@ -111,7 +114,7 @@ $$\[ t2v(\tau)[i] = \begin{cases}
 F(\omega_i \tau + \phi_i), & \text{if } 1 \leq i \leq k 
 \end{cases} \]$$
 
-Where $$\( t2v(\tau)[i] \)$$ denotes the ith element of the Time2Vec vector for time $$\(\tau\)$$. $$\( F \)$$ is a periodic activation function, and a sine function was chosen as the activation function. $$\( \omega_i \)$$ and $$\( \phi_i \)$$ are learnable parameters: $$\( \omega_i \)$$ and $$\( \phi_i \)$$ for the case $$\( i = 0 \)$$, and frequency and phase-shift of the sine function for $$\( 1 \leq i \leq k \)$$.
+Where \( t2v(\tau)[i] \) denotes the ith element of the Time2Vec vector for time \(\tau\). \( F \) is a periodic activation function, and a sine function was chosen as the activation function. \( \omega_i \) and \( \phi_i \) are learnable parameters: \( \omega_i \) and \( \phi_i \) for the case \( i = 0 \), and frequency and phase-shift of the sine function for \( 1 \leq i \leq k \).
 
 The Python implementation of this function in Keras was used in the program (Ntakouris, 2021)
 
