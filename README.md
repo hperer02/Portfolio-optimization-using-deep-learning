@@ -21,7 +21,7 @@ Using yfinance, ‘Closing Price’ data for all the assets in the portfolio wer
 ### Attributes
 - RSI
 It is a momentum indicator that is used in technical analysis which measures the magnitude and speed of an asset’s recent price to understand whether it is over or undervalued. The calculation has 2 steps as shown below,
-	$$
+$$
 \text{RSI}_{\text{step one}} = 100 - \left[ \frac{100}{1 + \left( \frac{\text{Average gain}}{\text{Average loss}} \right)} \right]
 $$
 
