@@ -106,10 +106,10 @@ Time is a vital feature for sequential data, and in some cases, time is fed as a
 
 For transformers, input embeddings are crucial, especially in the context of time series transformers where time embeddings play a critical role. Therefore, the Time2Vec representation proposed by Kazemi et al. was utilized in this project. It is represented by the equation:
 
-\[ t2v(\tau)[i] = \begin{cases} 
+$$\[ t2v(\tau)[i] = \begin{cases} 
 \omega_i \tau + \phi_i, & \text{if } i = 0 \\
 F(\omega_i \tau + \phi_i), & \text{if } 1 \leq i \leq k 
-\end{cases} \]
+\end{cases} \]$$
 
 Where \( t2v(\tau)[i] \) denotes the ith element of the Time2Vec vector for time \(\tau\). \( F \) is a periodic activation function, and a sine function was chosen as the activation function. \( \omega_i \) and \( \phi_i \) are learnable parameters: \( \omega_i \) and \( \phi_i \) for the case \( i = 0 \), and frequency and phase-shift of the sine function for \( 1 \leq i \leq k \).
 
