@@ -42,7 +42,7 @@ The standard number of periods used to calculate the initial RSI value is 14. Th
 - EMA
   It is a weighted moving average which gives more priority to recent price data of the asset. It can be calculated using the below equation,
   
-	$$\text{EMA} = \left( \frac{\text{Price}_{\text{current}} \times 2}{N+1} \right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{N+1} \right)$$
+	$${\text{EMA} = \left( \frac{{\text{Price}_{\text{current}} \times 2}}{{N+1}} \right) + \text{EMA}_{\text{previous}} \times \left( 1 - \frac{2}{{N+1}} \right)}$$
 
 Here, the N indicates the number of days chosen for EMA and the weighting given to the most recent price is greater for a short period of EMA than for a longer period of EMA (What is EMA? How to Use Exponential Moving Average With Formula, 2023).
 
