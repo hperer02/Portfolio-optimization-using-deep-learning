@@ -48,6 +48,7 @@ Here, the N indicates the number of days chosen for EMA and the weighting given 
 
 - MOM
 This attribute is used to determine the momentum of an asset when it is gaining or falling in price in the market. It simply compares the current price of an asset with the previous price of it from a given number of periods ago. It can be calculated as below,
+
 $$\text{MOM} = \text{Closing Price}_{\text{current}} - \text{Closing Price}_{\text{n periods ago}}$$
 	
 - Simple Moving Averages (SMA)
@@ -63,8 +64,7 @@ The above attributes were calculated for each asset and saved into a pandas data
 Initially, 8 features were chosen for the model. The nature of the application is time series prediction and there are numerous feature selection techniques that could be used for selecting the vital features. Namely, RFE (Recursive Feature Elimination), correlation with the target variable or other predictors, Principal Component Analysis (PCA) etc. however, RFE is the most common feature selection method that is used for time series prediction tasks. For this task RFE is used with RF (Random Forest) to select the 5 most important features by setting the threshold to 0.3. This value was previously used by Wang et al. for a time series feature selection in their research (Wang et al., 2020). sklearn package was used for implementing feature selection. Results of RFE with RF proved that Closing price, stock ticker value, RSI, 5-day SMA, 10-day SMA and 20-day SMA are the key features for the model.
 
 ## Data transformation for supervised learning
-In order to prepare the dataset for a time series prediction task, it has to be transformed. At first, based on the results of the feature selection, the less important features will be dropped from the database (pandas data frame) and then the whole database is converted to a NumPy array. This resulted in an array which has number of rows equal to the number of trading days and columns equal to the number of features considered. Then the array was reshaped in such a way that each row consists of data pertaining to 5 trading days. This arrangement was made because the model predicts the returns of assets for the following week, given the current weeks’ data. 
-Then the data will be split into training and test sets. A split of 0.6 is used for training, 0.2 for validation and 0.2 is used for testing.
+In order to prepare the dataset for a time series prediction task, it has to be transformed. At first, based on the results of the feature selection, the less important features will be dropped from the database (pandas data frame) and then the whole database is converted to a NumPy array. This resulted in an array which has number of rows equal to the number of trading days and columns equal to the number of features considered. Then the array was reshaped in such a way that each row consists of data pertaining to 5 trading days. This arrangement was made because the model predicts the returns of assets for the following week, given the current weeks’ data. Then the data will be split into training and test sets. A split of 0.6 is used for training, 0.2 for validation and 0.2 is used for testing.
 
 ## Model architecture
 There are several models that have been used in past research for stock return predictions. Recurrent Neural Networks is a popular method which has been used in multiple occasions and the LSTM (Long Short Term Memory) is the most widely used architecture (Fischer and Krauss, 2018; Wang et al., 2020). 
@@ -83,10 +83,10 @@ The special characteristic of LSTM is the capability of maintaining memory cells
  	- Input gate: Defines the information which needs to be added to the memory.
   	- Output gate: Defines which information to use as the output
 
-Sen et al. designed an LSTM architecture to predict the future stock prices of top five assets from nine different sectors of the Indian Stock Market. The model uses only the ‘Daily close prices’ of the past 50 days of each stock. Therefore, the input layer takes the shape (50,1). Then, the model receives this data and forwards it to the first LSTM layer which contains 256 nodes. The LSTM layer has a shape of (50,256) at the output. The first LSTM layer is followed by a dropout layer which switches off 30 percent of the nodes to avoid overfitting and then another LSTM layer (50,256) receives the output coming from the dropout layer and which is followed by another dropout layer of the same dropout rate. Then finally, a dense layer with 256 nodes receives the output of the second LSTM layer and outputs a single node which yields the predicted value of the close price. The architecture diagram of the network is shown in figure 3.
+Sen et al. designed an LSTM architecture to predict the future stock prices of top five assets from nine different sectors of the Indian Stock Market. The model uses only the ‘Daily close prices’ of the past 50 days of each stock. Therefore, the input layer takes the shape (50,1). Then, the model receives this data and forwards it to the first LSTM layer which contains 256 nodes. The LSTM layer has a shape of (50,256) at the output. The first LSTM layer is followed by a dropout layer which switches off 30 percent of the nodes to avoid overfitting and then another LSTM layer (50,256) receives the output coming from the dropout layer and which is followed by another dropout layer of the same dropout rate. Then finally, a dense layer with 256 nodes receives the output of the second LSTM layer and outputs a single node which yields the predicted value of the close price. The architecture diagram of the network is shown below.
 ![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/da9f20a8-7b48-4c5f-848b-8c9e1d44e6fb)
 
-However, the layout of the of the above architecture has to be adjusted to fulfill the purpose of the task. Therefore, instead of taking the previous close prices of the past 50 days, last weeks’ data is considered and instead of predicting the close price of the next day, the closing prices for the next are predicted using the model. The model was implemented using TensorFlow (refer Appendix 2)
+However, the layout of the of the above architecture has to be adjusted to fulfill the purpose of the task. Therefore, instead of taking the previous close prices of the past 50 days, last weeks’ data is considered and instead of predicting the close price of the next day, the closing prices for the next are predicted using the model. The model was implemented using TensorFlow.
 
 ![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/98cc48c3-2d84-444e-9018-a5235e66a86d)
 
@@ -95,33 +95,36 @@ Attention concept was first introduced by Vaswani et al. to improve the performa
 ![transformer](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/36e2670d-e592-4e8a-8d9f-3dad34f11cef)
 
 #### Encoder &  decoder
-As shown in figure 5, there is an encoding section, a decoding section and the connections between them. The encoders are all identical in structure and they are comprised of 2 important sub layers, namely the Self-Attention layer and Feed-Forward layer. The Decoder has both these layers, but it contains an additional attention layer in between them to set focus on relevant parts of the input sequence. This is visualized below.
+As shown in below figure, there is an encoding section, a decoding section and the connections between them. The encoders are all identical in structure and they are comprised of 2 important sub layers, namely the Self-Attention layer and Feed-Forward layer. The Decoder has both these layers, but it contains an additional attention layer in between them to set focus on relevant parts of the input sequence. This is visualized below.
 
 ![encoder](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/a4920b5c-6f69-4f28-9d65-0417a19ecfcf)
 
-However, for the time series transformer, the decoder part is irrelevant as it only consists of an encoder. Input embeddings are fed into the encoder block along with the input vector as shown in figure 5 and it only happens in the first encoder block. Input embeddings are time embeddings in the context of a time series transformer, and it is further explained later in this section. This input flows through a self-attention layer and then the output of this is fed to a feed forward neural network.
+However, for the time series transformer, the decoder part is irrelevant as it only consists of an encoder. Input embeddings are fed into the encoder block along with the input vector as shown in above figure and it only happens in the first encoder block. Input embeddings are time embeddings in the context of a time series transformer, and it is further explained later in this section. This input flows through a self-attention layer and then the output of this is fed to a feed forward neural network.
 
 #### Time embeddings
-Time is a vital feature for sequential data and in some cases, time is fed as an input feature. In recent research, it has been found that when a learnable vector representation or embedding for time is developed instead of using it merely as an input feature, model yields better performance (Kazemi et al., 2019)
-For transformers, input embeddings are crucial. Therefore, in context of time series transformer, time embeddings are crucial. Therefore, Time2Vec representation proposed by Kazemi et al. was used for this project. It is represented in the below equation,
+Time is a vital feature for sequential data, and in some cases, time is fed as an input feature. Recent research suggests that developing a learnable vector representation or embedding for time instead of using it merely as an input feature can improve model performance (Kazemi et al., 2019).
 
-	$$t2v(\tau)[i] = \begin{cases}\omega_i \tau + \varphi_i, & \text{if } i = 0 \\
-F(\omega_i \tau + \varphi_i), & \text{if } 1 \leq i \leq k\end{cases}$$
+For transformers, input embeddings are crucial, especially in the context of time series transformers where time embeddings play a critical role. Therefore, the Time2Vec representation proposed by Kazemi et al. was utilized in this project. It is represented by the equation:
 
+\[ t2v(\tau)[i] = \begin{cases} 
+\omega_i \tau + \phi_i, & \text{if } i = 0 \\
+F(\omega_i \tau + \phi_i), & \text{if } 1 \leq i \leq k 
+\end{cases} \]
 
-Where t2v(τ)[i] is the ith element of t2v(τ), F is a periodic activation function and sine function was chosen as the activation function. ω_i and φ_i are learnable parameters for the case i=0 and for the case 1≤i≤k are frequency and the phase-shift of the sine function.
-Python implementation of the above function in Keras was used in the program (Ntakouris, 2021). Please refer Appendix 3 for the implementation.
+Where \( t2v(\tau)[i] \) denotes the ith element of the Time2Vec vector for time \(\tau\). \( F \) is a periodic activation function, and a sine function was chosen as the activation function. \( \omega_i \) and \( \phi_i \) are learnable parameters: \( \omega_i \) and \( \phi_i \) for the case \( i = 0 \), and frequency and phase-shift of the sine function for \( 1 \leq i \leq k \).
+
+The Python implementation of this function in Keras was used in the program (Ntakouris, 2021)
+
 
 #### Designed time series transformer architecture 
 In the proposed architecture, transformed input for the supervised learning task is first fed to a time distributed layer, a linear and non-linear trend will be generated for each input feature, and it is concatenated to the input. Then it will be passed through multiheaded attention layer and then the result is added back to the input as shown in figure 10 through residual connections. Then the result is passed through a normalization layer before it is fed to the feed forward layer. In feed forward, 2 convolution layers are used. Dropout is used after the multiheaded layer and in between the convolution layers in order to stabilize the network and increase efficiency. 
 The output of the transformer block (i.e. encoder) is passed through a global average pooling layer, and it is applied to reduce the dimension of the network. Finally, 2 dense layers of 256 neurons and 5 neurons are used to get the predictions for the following week.
 ![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/6424a1c1-d9d6-456d-9931-6f09f02d9aa2)
 
-Keras time series transformer implementation was taken as the base code for implementing the model architecture (refer Appendix 5).
+Keras time series transformer implementation was taken as the base code for implementing the model architecture.
 
 #### Optimizer & loss function
-Non-accelerated gradient descent optimization techniques do not work well with transformers. Therefore, as the optimizer Adam has been used. A crucial part of the multi-headed attention in order to lead towards greater stability is the learning rate warmup. In order to facilitate this, initially a small learning rate is chosen and then it gradually incremented till it reaches the base value and then decreased again. For the loss function Mean Absolute Percentage Error (MAPE) was chosen. Refer Appendix 4 for the technical implementation.
-
+Non-accelerated gradient descent optimization techniques do not work well with transformers. Therefore, as the optimizer Adam has been used. A crucial part of the multi-headed attention in order to lead towards greater stability is the learning rate warmup. In order to facilitate this, initially a small learning rate is chosen and then it gradually incremented till it reaches the base value and then decreased again. For the loss function Mean Absolute Percentage Error (MAPE) was chosen.
 ## Portfolio optimization model
 As discussed in the literature review, there are multiple portfolio building methods.  According to MV model, variance of a given portfolio is reliant on variances of its individual stocks and the covariances among each pair as given by,
 	$$\text{Variance} = \sum_{i=1}^{n} w_i s_i^2 + 2 \sum_{i,j} w_i w_j \text{cov}(i,j)$$
@@ -185,7 +188,7 @@ For each portfolio, 10 assets were chosen out of the top 20 stocks of the FTSE 1
 
 ## Discussion
 The results of the 2 models discussed in Results section can be summarized as below,
-
+### Summary of Transformer Results
 | Portfolio | No of assets | Average MAPE | Actual return | Predicted return |
 |-----------|--------------|--------------|---------------|------------------|
 | 1         | 5            | 0.0277       | 25.701        | 26.556           |
@@ -199,13 +202,10 @@ The results of the 2 models discussed in Results section can be summarized as be
 | 9         | 5            | 0.0227       | 23.408        | 24.965           |
 | 10        | 6            | 0.0580       | 17.828        | 19.281           |
 
-**Table 6 - Transformer Results Summary**
+**Transformer Results Summary**
 
-As seen in Table 6, portfolio 3 yielded the highest actual return with an average MAPE of 0.0486. Despite literature suggesting 10 assets are optimal for portfolio construction, portfolios with 6 assets often yielded higher returns, with zero weights assigned to the remaining assets (as discussed in the Results section). The majority of portfolios consisted of either 5 or 6 assets.
-
----
-
-## Best Portfolio Composition (Table 34)
+As seen in above table, portfolio 3 yielded the highest actual return with an average MAPE of 0.0486. Despite literature suggesting 10 assets are optimal for portfolio construction, portfolios with 6 assets often yielded higher returns, with zero weights assigned to the remaining assets (as discussed in the Results section). The majority of portfolios consisted of either 5 or 6 assets.Therefore, the composition of the best portfolio built using 10,000 GBP,
+### Best Portfolio Composition
 
 | Company           | Stock ticker | Weight (%) | Amount   | Expected return |
 |-------------------|--------------|------------|----------|-----------------|
@@ -217,11 +217,10 @@ As seen in Table 6, portfolio 3 yielded the highest actual return with an averag
 | Linde             | LIN          | 21.962     | £2196.2  | £2797.91        |
 | **Total Expected Return** | -       | -          | -        | **£12739.93**   |
 
-**Table 7 - Best Portfolio**
+**Best Portfolio**
 
----
 
-## Summary of LSTM Results
+### Summary of LSTM Results
 
 | Portfolio | No of assets | Average MAPE | Actual return | Predicted return |
 |-----------|--------------|--------------|---------------|------------------|
@@ -236,7 +235,7 @@ As seen in Table 6, portfolio 3 yielded the highest actual return with an averag
 | 9         | 4            | 0.5132       | 23.408        | 26.880           |
 | 10        | 6            | 0.4764       | 17.828        | 24.782           |
 
-**Table 8 - LSTM Results Summary**
+**LSTM Results Summary**
 
 As shown in Table 8, while portfolio 3 achieved the highest actual return, portfolio 1 had the highest predicted return despite a higher average MAPE of 0.5044. The poor performance of LSTM models in predicting stock returns may be attributed to their use of multiple features compared to the simpler approach of using only closing prices, as noted by Sen et al. Transformers, with their multiheaded attention mechanism and time embeddings, are better suited for capturing complex patterns.
 
@@ -254,3 +253,6 @@ The best performance was achieved with the following hyperparameters:
 These settings provided optimal results without increasing model complexity unnecessarily.
 
 ## Conclusion & future work
+In this project, historical financial asset related data were downloaded, processed and transformed to feed an existing LSTM model (Sen, Dutta and Mehtab, 2021) and a Time series transformer inspired by the time series classification proposed by Ntakouris (Ntakouris, 2021). Although in the proposal, LSTM was picked as the desired model for stock return calculations, further research into the latest neural network architectures proved time series transformers could be a better approach for the task. Therefore, an existing LSTM architecture and a designed and developed transformer architecture were considered. Using the models, stock return predictions were calculated for each portfolio, assuming there were no transaction costs and no portfolio rebalancing, therefore, all the assets had the same holding period. However, during the project sharpe ratio-based portfolio optimisation was chosen over typical Markovitz model due to high-risk high reward nature of the real-world portfolios. Finally, using the return predictions, expected portfolio returns were calculated for each portfolio.
+In hindsight, I believe I was able to achieve all objectives of the project. I spent a substantial amount of time learning about transformers and training and tuning them. It was challenging to design a suitable architecture and tune them due to the lack of research with regards to transformers in the time series domain. Even though, substantial amount of time was spent and technical implementation of incorporating sentimental analysis of financial news as an input feature was completed, it could not be incorporated due to lack of free APIs. Even the paid APIs like NewsAPI did not provide data beyond 2 years and as per the requirement of this project, historical data was needed for at least 10 years. 
+However, the topic of portfolio optimisation is very broad, therefore, while I was working on the project, I stumbled across few interesting things that I could not incorporate in this project scope due to time constraint which hindered me from implementing real world portfolio optimisation model. Therefore, there were some limitations to the project as well. Here all the assets are held for a fixed period and returns are calculated at the end of the period. In an actual scenario, techniques such as portfolio rebalancing are used to manage the portfolio where holding periods are defined in advance and the assets are sold/bought based on the returns. This model can be further improved by incorporating such a model and dynamically changing the portfolio with time and incorporating sentiment analysis of financial news as an input to the model.
