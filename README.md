@@ -21,7 +21,8 @@ Using yfinance, ‘Closing Price’ data for all the assets in the portfolio wer
 ### Attributes
 - RSI
 It is a momentum indicator that is used in technical analysis which measures the magnitude and speed of an asset’s recent price to understand whether it is over or undervalued. The calculation has 2 steps as shown below,
-	〖RSI〗_(step one)=100-[100/(1+(Average gain)/(Average loss))]	
+	\[ \text{RSI}_{\text{step one}} = 100 - \left[ \frac{100}{1 + \left( \frac{\text{Average gain}}{\text{Average loss}} \right)} \right] \]
+	
 
 The standard number of periods used to calculate the initial RSI value is 14. Therefore, a period of 14 days will be considered for the RSI calculation. The second will be calculated as below (Relative Strength Index (RSI) Indicator Explained With Formula, 2021),
 	〖RSI〗_(step two)=100-[100/(1+((Previous average gain×13)+Current gain)/((Previous average loss×13)+Current loss))]
