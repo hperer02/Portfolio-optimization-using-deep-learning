@@ -9,9 +9,9 @@ This project implements a deep learning framework applied to stock portfolio man
 - [Feature selection](#feature-selection)
 - [Data transformation for supervised learning](#Data-transformation-for-supervised-learning)
 - [Model architecture](#model-architecture)
-- [Inference](#inference)
+- [Portfolio optimization model](#Portfolio-optimization-model)
 - [Results](#results)
-- [Conclusion](#conclusion)
+- [Conclusion & future work](#conclusion--future-work)
 - [Acknowledgments](#acknowledgments)
 
 ## Data Loading & Preprocessing
@@ -90,4 +90,166 @@ However, the layout of the of the above architecture has to be adjusted to fulfi
 ![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/98cc48c3-2d84-444e-9018-a5235e66a86d)
 
 ### Time series transformer model
-Attention concept was first introduced by Vaswani et al. to improve the performance of neural machine translation applications. Transformers use attention to enhance the training speed of the application. The transformers have 2 main components, the encoder part, and the decoder part. However, transformer models do not necessarily need to have both.  Figure 5 shows the Transformer model architecture proposed by Vaswani et al. (Vaswani et al., 2023)
+Attention concept was first introduced by Vaswani et al. to improve the performance of neural machine translation applications. Transformers use attention to enhance the training speed of the application. The transformers have 2 main components, the encoder part, and the decoder part. However, transformer models do not necessarily need to have both.  Below figure shows the Transformer model architecture proposed by Vaswani et al. (Vaswani et al., 2023)
+![transformer](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/36e2670d-e592-4e8a-8d9f-3dad34f11cef)
+
+#### Encoder &  decoder
+As shown in figure 5, there is an encoding section, a decoding section and the connections between them. The encoders are all identical in structure and they are comprised of 2 important sub layers, namely the Self-Attention layer and Feed-Forward layer. The Decoder has both these layers, but it contains an additional attention layer in between them to set focus on relevant parts of the input sequence. This is visualized below.
+
+![encoder](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/a4920b5c-6f69-4f28-9d65-0417a19ecfcf)
+
+However, for the time series transformer, the decoder part is irrelevant as it only consists of an encoder. Input embeddings are fed into the encoder block along with the input vector as shown in figure 5 and it only happens in the first encoder block. Input embeddings are time embeddings in the context of a time series transformer, and it is further explained later in this section. This input flows through a self-attention layer and then the output of this is fed to a feed forward neural network.
+
+#### Time embeddings
+Time is a vital feature for sequential data and in some cases, time is fed as an input feature. In recent research, it has been found that when a learnable vector representation or embedding for time is developed instead of using it merely as an input feature, model yields better performance (Kazemi et al., 2019)
+For transformers, input embeddings are crucial. Therefore, in context of time series transformer, time embeddings are crucial. Therefore, Time2Vec representation proposed by Kazemi et al. was used for this project. It is represented in the below equation,
+
+	$$t2v(\tau)[i] = \begin{cases}\omega_i \tau + \varphi_i, & \text{if } i = 0 \\
+F(\omega_i \tau + \varphi_i), & \text{if } 1 \leq i \leq k\end{cases}$$
+
+
+Where t2v(τ)[i] is the ith element of t2v(τ), F is a periodic activation function and sine function was chosen as the activation function. ω_i and φ_i are learnable parameters for the case i=0 and for the case 1≤i≤k are frequency and the phase-shift of the sine function.
+Python implementation of the above function in Keras was used in the program (Ntakouris, 2021). Please refer Appendix 3 for the implementation.
+
+#### Designed time series transformer architecture 
+In the proposed architecture, transformed input for the supervised learning task is first fed to a time distributed layer, a linear and non-linear trend will be generated for each input feature, and it is concatenated to the input. Then it will be passed through multiheaded attention layer and then the result is added back to the input as shown in figure 10 through residual connections. Then the result is passed through a normalization layer before it is fed to the feed forward layer. In feed forward, 2 convolution layers are used. Dropout is used after the multiheaded layer and in between the convolution layers in order to stabilize the network and increase efficiency. 
+The output of the transformer block (i.e. encoder) is passed through a global average pooling layer, and it is applied to reduce the dimension of the network. Finally, 2 dense layers of 256 neurons and 5 neurons are used to get the predictions for the following week.
+![image](https://github.com/hperer02/Portfolio-optimization-using-deep-learning/assets/124153856/6424a1c1-d9d6-456d-9931-6f09f02d9aa2)
+
+Keras time series transformer implementation was taken as the base code for implementing the model architecture (refer Appendix 5).
+
+#### Optimizer & loss function
+Non-accelerated gradient descent optimization techniques do not work well with transformers. Therefore, as the optimizer Adam has been used. A crucial part of the multi-headed attention in order to lead towards greater stability is the learning rate warmup. In order to facilitate this, initially a small learning rate is chosen and then it gradually incremented till it reaches the base value and then decreased again. For the loss function Mean Absolute Percentage Error (MAPE) was chosen. Refer Appendix 4 for the technical implementation.
+
+## Portfolio optimization model
+As discussed in the literature review, there are multiple portfolio building methods.  According to MV model, variance of a given portfolio is reliant on variances of its individual stocks and the covariances among each pair as given by,
+	$$\text{Variance} = \sum_{i=1}^{n} w_i s_i^2 + 2 \sum_{i,j} w_i w_j \text{cov}(i,j)$$
+
+Here, the w_i is the weight assigned to each stock, s_i  is the standard deviation of each stock, the minimum risk portfolio is the portfolio which yields the lowest value for variance. Even though in theory minimum variance portfolio is deemed as the best portfolio, in a real-world, investors prefer to undertake higher risks, in order to attain higher profits. Therefore, to serve this purpose Sharpe Ratio is used.
+Based on the return predictions of the model, the most optimised portfolio will be calculated. The criteria chosen to find the most optimised portfolio is maximizing the expected portfolio return while minimizing the risk. Sharpe ratio is calculated using the below equation,
+  
+	$$\text{Sharpe Ratio} = \frac{R(x) - R_f}{\sigma}$$
+	
+
+Where R(x) is the average rate of return, Rf is the best available risk-free rate of return and the standard deviation of R(x) is given by σ. Sharpe ratio of 0 denotes that the investment does not yield any excess returns, ratio of 1 is considered good for investment and greater than 1 is deemed highly appropriate. The sharpe ratio is maximized based on the below equation,
+	$$\max \left[ \frac{\sum_{i=1}^{N} w_i \mu_i - R_f}{\sqrt{\sum_i \sum_j w_i w_j \sigma_{ij}}} \right]$$
+ 
+       Subject to:
+$$\sum_{i=1}^{N} w_i = 1$$
+$$0 \leq w_i \leq 1 \quad \text{for } i = 1, 2, \ldots, N$$
+
+The numerator of the function calculates the excess returns, w_i is the weight assigned to each asset and μ_i is the return of each asset and Rf is the risk-free asset. The denominator calculates the portfolio risk which is the standard deviation of its returns and σ_ijis the covariance matrix of returns. In order to solve this via python, Sequential Least Squares Quadratic Programming (SLSQP) algorithm, as implemented in scipy.optimize package is used (refer Appendix 6)
+
+## Results
+For each portfolio, 10 assets were chosen out of the top 20 stocks of the FTSE 100 by market share and returns were calculated using proposed time series architecture and Sen et al’s LSTM architecture. For each portfolio, weights of each asset, Maximum Sharpe ratio, Annualized risk and Expected portfolio returns were calculated and for each asset Mean Absolute Percentage Error and Variance ratios were calculated. The top 20 stocks of FTSE top 100 by market cap are given in table 
+
+### The top 20 stocks of FTSE top 100 by market cap
+| Stock Ticker | Company Name                      |
+|--------------|-----------------------------------|
+| SHEL.L       | Shell                             |
+| LIN          | Linde                             |
+| HSBA.L       | HSBC UK                           |
+| ULVR.L       | Unilever                          |
+| RIO.L        | Rio Tinto                         |
+| BP.L         | British Petroleum                 |
+| GSK.L        | Glaxo Smith Kline                 |
+| DGE.L        | Diageo                            |
+| REL.L        | RELX                              |
+| BATS.L       | British American Tobacco          |
+| LSEG.L       | London Stock Exchange Group       |
+| AON          | Aon                               |
+| RKT.L        | Reckitt Benckiser                 |
+| CPG.L        | Compass Group                     |
+| FERG.L       | Ferguson                          |
+| LLOY.L       | Lloyds Banking Group              |
+| RR.L         | Rolls-Royce Holdings              |
+| AAL.L        | Anglo American                    |
+| BA.L         | BAE Systems                       |
+| NG.L         | National Grid                     |
+
+### Portfolios constructed using the FTSE top 20 by market cap
+
+| Portfolio | Assets                                                                 |
+|-----------|------------------------------------------------------------------------|
+| 1         | ['FERG.L', 'SHEL.L', 'RIO.L', 'AON', 'ULVR.L', 'BP.L', 'RKT.L', 'DGE.L', 'LSEG.L', 'RR.L'] |
+| 2         | ['RKT.L', 'CPG.L', 'SHEL.L', 'DGE.L', 'NG.L', 'GSK.L', 'LLOY.L', 'HSBA.L', 'REL.L', 'BA.L'] |
+| 3         | ['CPG.L', 'NG.L', 'BP.L', 'FERG.L', 'BATS.L', 'LIN', 'RKT.L', 'ULVR.L', 'SHEL.L', 'LLOY.L'] |
+| 4         | ['HSBA.L', 'LLOY.L', 'BATS.L', 'RKT.L', 'AAL.L', 'NG.L', 'LIN', 'REL.L', 'RIO.L', 'RR.L'] |
+| 5         | ['LLOY.L', 'BP.L', 'FERG.L', 'LSEG.L', 'RKT.L', 'NG.L', 'HSBA.L', 'SHEL.L', 'CPG.L', 'BA.L'] |
+| 6         | ['LLOY.L', 'AON', 'BP.L', 'LIN', 'LSEG.L', 'BATS.L', 'SHEL.L', 'AAL.L', 'DGE.L', 'HSBA.L'] |
+| 7         | ['LSEG.L', 'BP.L', 'ULVR.L', 'GSK.L', 'AAL.L', 'RR.L', 'RIO.L', 'REL.L', 'BATS.L', 'HSBA.L'] |
+| 8         | ['REL.L', 'BA.L', 'LIN', 'RIO.L', 'BATS.L', 'BP.L', 'LLOY.L', 'LSEG.L', 'RKT.L', 'DGE.L'] |
+| 9         | ['RKT.L', 'LSEG.L', 'GSK.L', 'ULVR.L', 'AON', 'RR.L', 'FERG.L', 'SHEL.L', 'DGE.L', 'REL.L'] |
+| 10        | ['HSBA.L', 'AON', 'BA.L', 'LLOY.L', 'BATS.L', 'RIO.L', 'NG.L', 'RKT.L', 'AAL.L', 'SHEL.L'] |
+
+## Discussion
+The results of the 2 models discussed in Results section can be summarized as below,
+
+| Portfolio | No of assets | Average MAPE | Actual return | Predicted return |
+|-----------|--------------|--------------|---------------|------------------|
+| 1         | 5            | 0.0277       | 25.701        | 26.556           |
+| 2         | 10           | 0.0710       | 16.382        | 16.426           |
+| 3         | 6            | 0.0649       | 27.398        | 28.656           |
+| 4         | 5            | 0.0477       | 26.360        | 26.568           |
+| 5         | 6            | 0.0708       | 25.1075       | 24.221           |
+| 6         | 5            | 0.0255       | 19.104        | 19.593           |
+| 7         | 3            | 0.0254       | 26.344        | 25.133           |
+| 8         | 5            | 0.0379       | 21.736        | 22.085           |
+| 9         | 5            | 0.0227       | 23.408        | 24.965           |
+| 10        | 6            | 0.0580       | 17.828        | 19.281           |
+
+**Table 6 - Transformer Results Summary**
+
+As seen in Table 6, portfolio 3 yielded the highest actual return with an average MAPE of 0.0486. Despite literature suggesting 10 assets are optimal for portfolio construction, portfolios with 6 assets often yielded higher returns, with zero weights assigned to the remaining assets (as discussed in the Results section). The majority of portfolios consisted of either 5 or 6 assets.
+
+---
+
+## Best Portfolio Composition (Table 34)
+
+| Company           | Stock ticker | Weight (%) | Amount   | Expected return |
+|-------------------|--------------|------------|----------|-----------------|
+| Compass Group     | CPG.L        | 4.382      | £438.2   | £558.26         |
+| National Grid     | NG.L         | 1.085      | £108.5   | £138.23         |
+| British Petroleum | BP.L         | 18.906     | £1890.6  | £2408.59        |
+| Ferguson          | FERG.L       | 28.053     | £2805.3  | £3573.90        |
+| Shell             | SHEL.L       | 25.613     | £2561.3  | £3263.04        |
+| Linde             | LIN          | 21.962     | £2196.2  | £2797.91        |
+| **Total Expected Return** | -       | -          | -        | **£12739.93**   |
+
+**Table 7 - Best Portfolio**
+
+---
+
+## Summary of LSTM Results
+
+| Portfolio | No of assets | Average MAPE | Actual return | Predicted return |
+|-----------|--------------|--------------|---------------|------------------|
+| 1         | 5            | 0.5044       | 25.701        | 29.317           |
+| 2         | 10           | 0.5117       | 16.382        | 15.230           |
+| 3         | 6            | 0.5134       | 27.398        | 20.160           |
+| 4         | 5            | 0.4852       | 26.360        | 22.362           |
+| 5         | 6            | 0.4926       | 25.1075       | 27.890           |
+| 6         | 4            | 0.4503       | 19.104        | 19.714           |
+| 7         | 10           | 0.4986       | 26.344        | 14.477           |
+| 8         | 5            | 0.4900       | 21.736        | 24.196           |
+| 9         | 4            | 0.5132       | 23.408        | 26.880           |
+| 10        | 6            | 0.4764       | 17.828        | 24.782           |
+
+**Table 8 - LSTM Results Summary**
+
+As shown in Table 8, while portfolio 3 achieved the highest actual return, portfolio 1 had the highest predicted return despite a higher average MAPE of 0.5044. The poor performance of LSTM models in predicting stock returns may be attributed to their use of multiple features compared to the simpler approach of using only closing prices, as noted by Sen et al. Transformers, with their multiheaded attention mechanism and time embeddings, are better suited for capturing complex patterns.
+
+### Transformer Model Hyperparameters
+
+The best performance was achieved with the following hyperparameters:
+- `head_size`: 128
+- `number of heads`: 8
+- `ff_dim`: 2 (filter dimension of convolution layers)
+- `number of encoder blocks`: 1
+- `mlp_units`: 256 (number of hidden nodes in ANN layer)
+- `mlp_dropout`: 0.1 (dropout rate for ANN layer)
+- `dropout`: 0.1 (dropout rate for encoder)
+
+These settings provided optimal results without increasing model complexity unnecessarily.
+
+## Conclusion & future work
